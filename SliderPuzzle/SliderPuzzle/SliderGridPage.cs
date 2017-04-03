@@ -66,10 +66,10 @@ namespace SliderPuzzle
                 }
             }
 
-            //Shuffle();
-            //Shuffle();
-            //Shuffle();
-            //Shuffle();
+            Shuffle();
+            Shuffle();
+            Shuffle();
+            Shuffle();
 
             ContentView contentView = new ContentView
             {
