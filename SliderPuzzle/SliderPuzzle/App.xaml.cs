@@ -13,7 +13,7 @@ namespace SliderPuzzle
         {
             InitializeComponent();
 
-            MainPage = new SliderPuzzle.MainPage();
+            MainPage = new SliderPuzzle.SliderGridPage();
         }
 
         protected override void OnStart()
