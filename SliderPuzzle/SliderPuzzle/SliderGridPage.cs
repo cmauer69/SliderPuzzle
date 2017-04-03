@@ -66,10 +66,10 @@ namespace SliderPuzzle
                 }
             }
 
-            Shuffle();
-            Shuffle();
-            Shuffle();
-            Shuffle();
+            //Shuffle();
+            //Shuffle();
+            //Shuffle();
+            //Shuffle();
 
             ContentView contentView = new ContentView
             {
@@ -152,9 +152,16 @@ namespace SliderPuzzle
 
             }
 
+            Boolean hasWon = false;
+            hasWon = this.isWinner();
+            if (hasWon == true)
+            {
+                DisplayAlert("Congratulations!", "You are a winner!!!!", "OK");
+                ShowCompletePuzzle();
+            }
             OnContentViewSizeChanged(this.Content, null);
-        }
 
+        }
         void Shuffle()
             {
                 Random rand = new Random();
@@ -187,8 +194,40 @@ namespace SliderPuzzle
 
             }
 
-         }
+        public Boolean isWinner()
+        {
+            //Cycle through the _gridItems
+            //Check if the final position is the same as the current position
+            Boolean isWinner = true;
 
+            for (var row = 0; row < SIZE; row++)
+            {
+                for (var col = 0; col < SIZE; col++)
+                {
+                    GridItem item = _gridItems[new GridPosition(row, col)];
+                    if (!item.isPositionCorrect())
+                    {
+                        isWinner = false;
+                        break;
+                    }
+                    
+                }
+            }
+
+            return isWinner;
+        }
+
+        public void ShowCompletePuzzle()
+        {
+            //Set image 16 to the picture instead of being blank.
+            GridItem item = _gridItems[new GridPosition(3, 3)];
+            item.Source = ImageSource.FromResource("SliderPuzzle.Images.image-3-3.jpeg");
+            //OnContentViewSizeChanged(this.Content, null);
+
+        }
+
+
+    }
     //class GridItem : Label
     //{
     //    public GridPosition CurrentPosition
@@ -214,7 +253,11 @@ namespace SliderPuzzle
             get; set;
         }
 
-        private GridPosition _finalPosition;
+        private GridPosition _finalPosition
+        {
+            get; set;
+        }
+
         private Boolean _isEmptySpot;
         private String Text;
 
